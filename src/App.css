@@ -1,38 +1,218 @@
-.App {
-  text-align: center;
+/* ---------------------------
+   RESET & BASE STYLES
+--------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  height: 100%;
+  color: #fff;
+  overflow-x: hidden;
+  /* Smooth scrolling for a slick feel */
+  scroll-behavior: smooth;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Wrap everything in a subtle parallax background */
+.app-container {
+  /* A deep, cool gradient with a slight 3D feel */
+  background: linear-gradient(135deg, #1c2f3c 0%, #0a1015 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ---------------------------
+   HERO SECTION
+--------------------------- */
+.hero-section {
+  width: 100%;
+  height: 60vh; /* Adjust as needed */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  /* Subtle fade-in for entire hero area */
+  opacity: 0;
+  animation: heroFadeIn 1s forwards ease-in-out 0.5s;
 }
 
-.App-link {
-  color: #61dafb;
+/* Slight “glow” for main title */
+.animate-title {
+  font-size: 4rem;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  text-shadow: 0 0 8px rgba(0,212,255,0.7);
+  animation: fadeInDown 1s forwards;
+}
+.animate-subtitle {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeInUp 1s forwards 0.5s; /* 0.5s delay */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Keyframes to fade hero section in as a whole */
+@keyframes heroFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Title animations */
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
+@keyframes fadeInUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ---------------------------
+   AUDIO TOGGLE BUTTON
+--------------------------- */
+.audio-toggle {
+  padding: 0.6rem 1.2rem;
+  margin-top: 1rem;
+  background: #445566;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.audio-toggle:hover {
+  background: #667788;
+  transform: translateY(-2px);
+}
+.audio-toggle:active {
+  background: #2f3f4c;
+  transform: translateY(1px);
+}
+
+/* ---------------------------
+   3D HOUSE CONTAINER
+--------------------------- */
+.blueprint-container {
+  width: 100%;
+  height: 60vh; /* fill another chunk of the screen */
+  position: relative;
+  /* If you want a subtle overlay behind the 3D model, you can do it here */
+  /* background: rgba(0, 0, 0, 0.2); */
+}
+
+/* ---------------------------
+   DESCRIPTION SECTION
+--------------------------- */
+.description-section {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: rgba(28,47,60, 0.3); /* optional overlay style */
+  /* Slight fade-in effect on scroll */
+  opacity: 0;
+  animation: fadeInSection 1s forwards ease-in-out 1s;
+}
+.description-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.description-section p {
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+@keyframes fadeInSection {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------
+   STATS SECTION
+--------------------------- */
+.stats-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 2rem;
+  background: rgba(28,47,60, 0.2);
+  /* Fade in as well */
+  opacity: 0;
+  animation: fadeInSection 1s forwards ease-in-out 1.2s;
+}
+.stat-item {
+  margin: 0 2rem;
+  text-align: center;
+  transition: transform 0.4s;
+}
+.stat-item h3 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #00d4ff; /* highlight color */
+  transition: transform 0.4s, text-shadow 0.4s;
+  text-shadow: 0 0 6px rgba(0,212,255,0.3);
+}
+.stat-item p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+.stat-item:hover {
+  transform: translateY(-4px);
+}
+.stat-item:hover h3 {
+  transform: scale(1.1);
+  text-shadow: 0 0 12px rgba(0,212,255,0.5);
+}
+
+/* ---------------------------
+   FOOTER
+--------------------------- */
+.footer {
+  background: #0a1015;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  /* Slight top border for contrast */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  /* Fade in footer a bit later too */
+  opacity: 0;
+  animation: fadeInSection 1s forwards ease-in-out 1.5s;
+}
+.footer-links {
+  margin-top: 0.5rem;
+}
+.footer-links a {
+  color: #ffffffcc;
+  text-decoration: none;
+  margin: 0 0.8rem;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.footer-links a:hover {
+  color: #00d4ff;
+  text-shadow: 0 0 4px rgba(0,212,255,0.5);
+}
+
+/* 
+   Feel free to adjust keyframe delays 
+   so each section gracefully appears while scrolling.
+*/
