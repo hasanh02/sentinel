@@ -1,6 +1,6 @@
-import os
+from os import environ as env
 from flask import Flask, jsonify, request, send_file
-from dotenv import load_dotenv
+from dotenv import load_dotenv,find_dotenv
 import openai
 from fpdf import FPDF
 from flask_cors import CORS
@@ -11,8 +11,12 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
+
 # Load OpenAI API Key
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = env.get("OPENAI_API_KEY")
 openai.api_key = OPENAI_API_KEY
 
 # Optional: Create a custom PDF class to style headers/footers if desired
