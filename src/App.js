@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import * as THREE from 'three';
+
+// Import the new RiskSelection page
+import RiskSelection from './RiskSelection';
+
+// Import your existing CSS
 import './App.css';
 
-function App() {
-  // ----------------------------------------------------------------
+function HomePage() {
+  // ------------------------------------------------
   //  A) BACKGROUND AUDIO TOGGLE
-  // ----------------------------------------------------------------
+  // ------------------------------------------------
   const [audioOn, setAudioOn] = useState(false);
   const audioRef = useRef(null);
 
@@ -20,9 +26,9 @@ function App() {
     }
   };
 
-  // ----------------------------------------------------------------
+  // ------------------------------------------------
   //  B) THREE.JS SCENE
-  // ----------------------------------------------------------------
+  // ------------------------------------------------
   useEffect(() => {
     // 1. Scene & Background
     const scene = new THREE.Scene();
@@ -42,7 +48,7 @@ function App() {
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
 
-    //  attach to DOM
+    // Attach to DOM
     const container = document.getElementById('blueprint-container');
     if (container) {
       container.appendChild(renderer.domElement);
@@ -98,6 +104,7 @@ function App() {
     );
     roofGeometry.setIndex(roofIndices);
     roofGeometry.computeVertexNormals();
+
     const roofEdges = new THREE.EdgesGeometry(roofGeometry);
     const roofOutline = new THREE.LineSegments(roofEdges, edgeMaterial);
     roofOutline.position.y = baseHeight;
@@ -113,7 +120,6 @@ function App() {
     // (D) Windows
     const windowGeometry = new THREE.BoxGeometry(0.7, 0.7, 0.1);
     const windowEdges = new THREE.EdgesGeometry(windowGeometry);
-
     const leftWindow = new THREE.LineSegments(windowEdges, edgeMaterial);
     leftWindow.position.set(-1.2, 1.3, baseDepth / 2 + 0.05);
     houseGroup.add(leftWindow);
@@ -158,9 +164,9 @@ function App() {
     };
   }, []);
 
-  // ----------------------------------------------------------------
+  // ------------------------------------------------
   //  C) ANIMATED STATS WITH INTERSECTION OBSERVER
-  // ----------------------------------------------------------------
+  // ------------------------------------------------
   const statsRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
 
@@ -215,46 +221,36 @@ function App() {
 
   return (
     <>
-      {/* AUDIO element for background sound */}
       <audio
         ref={audioRef}
-        src="https://www.example.com/your-ambient-sound.mp3" 
+        src="https://www.example.com/your-ambient-sound.mp3"
         loop
       />
 
-      {/* 
-        PAGE CONTAINER:
-        We'll use a parallax-like background with `background-attachment: fixed`.
-        This is handled in App.css
-      */}
       <div className="app-container">
-
-        {/* HEADER / HERO SECTION */}
+        {/* HERO SECTION */}
         <div className="hero-section">
           <h1 className="main-title animate-title">SENTINEL</h1>
           <p className="tagline animate-subtitle">Never afraid again</p>
-          {/* Toggle button for the audio */}
+          {/* Toggle button for audio */}
           <button className="audio-toggle" onClick={toggleAudio}>
             {audioOn ? 'Pause Ambient' : 'Play Ambient'}
           </button>
         </div>
 
-        {/* 
-          3D House Container 
-          We'll position it so the house is in the middle of the screen 
-        */}
+        {/* 3D House */}
         <div id="blueprint-container" className="blueprint-container"></div>
 
-        {/* SUBHEADING & DESCRIPTION */}
+        {/* Description */}
         <section className="description-section">
           <h2>Welcome to Sentinel</h2>
           <p>
-            Sentinel provides state-of-the-art security solutions tailored to 
+            Sentinel provides state-of-the-art security solutions tailored to
             your home. With Sentinel, you are protected 24/7.
           </p>
         </section>
 
-        {/* DYNAMIC STATS SECTION */}
+        {/* Stats */}
         <section className="stats-section" ref={statsRef}>
           <div className="stat-item">
             <h3>{counter1.toLocaleString()}+</h3>
@@ -266,7 +262,7 @@ function App() {
           </div>
         </section>
 
-        {/* FOOTER */}
+        {/* Footer */}
         <footer className="footer">
           <p>HMHM © {new Date().getFullYear()} Sentinel. All rights reserved.</p>
           <div className="footer-links">
@@ -277,6 +273,32 @@ function App() {
         </footer>
       </div>
     </>
+  );
+}
+
+/* 
+   ---------------------------------
+   The Main App with React Router
+   ---------------------------------
+   We embed HomePage at "/", 
+   RiskSelection at "/risk".
+*/
+function App() {
+  return (
+    <Router>
+      {/* Basic Nav so we can move between pages */}
+      <nav style={{ textAlign: 'center', padding: '1rem' }}>
+        <Link to="/" style={{ marginRight: '15px' }}>Main Page</Link>
+        <Link to="/risk">Risk Selection</Link>
+      </nav>
+
+      <Routes>
+        {/* Home page: your rotating house */}
+        <Route path="/" element={<HomePage />} />
+        {/* Risk selection page: the new 4 dropdowns + get report */}
+        <Route path="/risk" element={<RiskSelection />} />
+      </Routes>
+    </Router>
   );
 }
 

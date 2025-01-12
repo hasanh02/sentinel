@@ -1,0 +1,166 @@
+/* Container with parallax background */
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+.risk-container {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #fff;
+  }
+  
+  /* The background layer (same gradient style as your first page) */
+  .parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #1c2f3c, #0a1015);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Main content wrapper */
+  .risk-content {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  /* Title */
+  .risk-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Grid for 4 boxes + button */
+  .risk-selection-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    opacity: 0;            /* fade-in from invisible */
+    transform: translateY(20px);
+    transition: opacity 1s, transform 1s;
+  }
+  .risk-selection-grid.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Each box */
+  .risk-box {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .risk-box label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .risk-box select,
+  .risk-box input {
+    width: 100%;
+    padding: 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 4px;
+    outline: none;
+    transition: background 0.3s;
+  }
+
+  .risk-box select {
+    -webkit-appearance: none; /* Remove default arrow styling */
+    -moz-appearance: none; /* For Firefox */
+    appearance: none;
+    width: 100%;
+    padding: 0.6rem;
+    background:rgba(255, 255, 255, 0.2); /* Set background for dropdown */
+    color: white; /* Set text color */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+  }
+  .risk-box select option {
+    background: rgba(0, 0, 0, 0.2); /* Set option background */
+    color: white; /* Set option text color */
+    padding: 0.5rem; /* Add padding for better readability */
+    border: none; /* Remove borders */
+  }
+
+  .risk-box select:hover,
+  .risk-box input:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* The button row (spans both columns) */
+  .report-button-container {
+    grid-column: 1 / 3;
+    text-align: center;
+  }
+  .report-button {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    background: #00d4ff;
+    color: #1c2f3c;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .report-button:hover {
+    background: #00aacc;
+    transform: scale(1.05);
+  }
+  
+  /* Guarantee & Lock */
+  .guarantee-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s, transform 1s;
+  }
+  .guarantee-section.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .guarantee-text {
+    margin-top: 3rem;
+    font-family: "Allura",cursive;/* or any cursive font you love */
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  .company-name {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  .lock-icon {
+    width: 70px;
+    margin: 0 auto;
+  }
+  .lock-icon svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Responsive: stack the grid on small screens */
+  @media (max-width: 600px) {
+    .risk-selection-grid {
+      grid-template-columns: 1fr;
+    }
+    .report-button-container {
+      grid-column: 1 / 2;
+    }
+  }
