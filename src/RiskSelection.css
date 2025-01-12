@@ -154,6 +154,29 @@
     height: auto;
     display: block;
   }
+
+  .report-button {
+    position: relative;
+  }
+  
+  .report-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .recommendations .download-button {
+    background-color: #00d4ff;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .recommendations .download-button:hover {
+    background-color: #00aacc;
+  }
   
   /* Responsive: stack the grid on small screens */
   @media (max-width: 600px) {

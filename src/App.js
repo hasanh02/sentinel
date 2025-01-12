@@ -232,10 +232,6 @@ function HomePage() {
         <div className="hero-section">
           <h1 className="main-title animate-title">SENTINEL</h1>
           <p className="tagline animate-subtitle">Never afraid again</p>
-          {/* Toggle button for audio */}
-          <button className="audio-toggle" onClick={toggleAudio}>
-            {audioOn ? 'Pause Ambient' : 'Play Ambient'}
-          </button>
         </div>
 
         {/* 3D House */}
@@ -287,9 +283,14 @@ function App() {
   return (
     <Router>
       {/* Basic Nav so we can move between pages */}
-      <nav style={{ textAlign: 'center', padding: '1rem' }}>
-        <Link to="/" style={{ marginRight: '15px' }}>Main Page</Link>
-        <Link to="/risk">Risk Selection</Link>
+      <nav style={{
+    textAlign: 'center',
+    padding: '1rem',
+    backgroundColor: '#1c2f3c', // Matches the app's background color
+    color: '#ffffff', // White text for visibility
+  }}>
+        <Link to="/" style={{ marginRight: '15px',fontWeight: 'bold', color:'#ffffff' }}>Main Page</Link>
+        <Link to="/risk" style={{ fontWeight: 'bold',color:'#ffffff' }}>Risk Selection</Link>
       </nav>
 
       <Routes>

@@ -136,11 +136,10 @@ html, body {
   margin-bottom: 1rem;
   text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
-.description-section p {
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-size: 1.1rem;
+.description-section {
+  text-align: center;
+  margin-top: 6rem; /* Increase this value to move it lower */
+  color: #ffffff; /* Ensure the text is visible */
 }
 @keyframes fadeInSection {
   0% { opacity: 0; transform: translateY(20px); }
